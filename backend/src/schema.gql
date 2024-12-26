@@ -1,0 +1,39 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserModel {
+  """User id"""
+  id: Int!
+
+  """User email"""
+  email: String!
+
+  """User password"""
+  password: String!
+}
+
+type Query {
+  users: [UserModel!]!
+  user(id: Int!): UserModel!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): UserModel!
+  updateUser(updateUserInput: UpdateUserInput!): UserModel!
+  removeUser(id: Int!): UserModel!
+}
+
+input CreateUserInput {
+  """Example field of email"""
+  email: String!
+
+  """Example field of password"""
+  password: String!
+}
+
+input UpdateUserInput {
+  email: String
+  password: String
+  id: Int!
+}

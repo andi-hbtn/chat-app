@@ -1,0 +1,13 @@
+npm install --save @nestjs/typeorm typeorm mysql2
+npm install --save @nestjs/config joi
+npm i @nestjs/graphql @nestjs/apollo @apollo/server graphql
+    1)code first is a great choise because
+        GQ schema align with schema and models of the ORM like TypeOrm and Sequelize
+    2)schema first if you have diferent database environments
+
+npm i --save class-validator class-transformer
+
+npm install --save @nestjs/passport passport passport-local
+npm install --save-dev @types/passport-local
+npm install --save @nestjs/jwt passport-jwt
+npm install --save-dev @types/passport-jwt
