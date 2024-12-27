@@ -6,13 +6,9 @@ const getCurrentUserByContext = (context:ExecutionContext):UserEntity=>{
     console.log('ExecutionContext Type:', context.getType());
     if(context.getType()=== 'http'){
         return context.switchToHttp().getRequest().user;
-    }
-    
-    if(context.getType<GqlContextType>() === 'graphql'){
+    } else if(context.getType<GqlContextType>() === 'graphql'){
         //console.log("gql-----")
         return GqlExecutionContext.create(context).getContext().req.user;
-
-        
     }
 }
 

@@ -8,7 +8,7 @@ const getCurrentUserByContext = (context) => {
     if (context.getType() === 'http') {
         return context.switchToHttp().getRequest().user;
     }
-    if (context.getType() === 'graphql') {
+    else if (context.getType() === 'graphql') {
         return graphql_1.GqlExecutionContext.create(context).getContext().req.user;
     }
 };
