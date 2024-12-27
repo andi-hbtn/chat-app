@@ -18,6 +18,8 @@ const users_service_1 = require("./users.service");
 const user_model_1 = require("./model/user.model");
 const create_user_input_1 = require("./dto/create-user.input");
 const update_user_input_1 = require("./dto/update-user.input");
+const common_1 = require("@nestjs/common");
+const gql_auth_guard_1 = require("../guards/gql-auth.guard");
 let UsersResolver = class UsersResolver {
     constructor(usersService) {
         this.usersService = usersService;
@@ -53,6 +55,7 @@ __decorate([
 ], UsersResolver.prototype, "createUser", null);
 __decorate([
     (0, graphql_1.Query)(() => [user_model_1.UserModel], { name: 'users' }),
+    (0, common_1.UseGuards)(gql_auth_guard_1.GqlAuthGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)

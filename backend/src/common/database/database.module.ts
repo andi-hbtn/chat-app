@@ -12,7 +12,8 @@ import { UserEntity } from "src/users/entities/user.entity";
         ConfigModule.forRoot({isGlobal:true}),
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver:ApolloDriver,
-            autoSchemaFile:"src/schema.gql"
+            autoSchemaFile:"src/schema.gql",
+            context: ({ req }) => ({ req }),
         }),
         TypeOrmModule.forRoot({
             type: process.env.type as "mysql",
@@ -33,5 +34,3 @@ import { UserEntity } from "src/users/entities/user.entity";
 
 
 export class DatabaseModule{}
-
-// console.log( typeof process.env.mysql_port)

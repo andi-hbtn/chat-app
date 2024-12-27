@@ -24,7 +24,8 @@ exports.DatabaseModule = DatabaseModule = __decorate([
             config_1.ConfigModule.forRoot({ isGlobal: true }),
             graphql_1.GraphQLModule.forRoot({
                 driver: apollo_1.ApolloDriver,
-                autoSchemaFile: "src/schema.gql"
+                autoSchemaFile: "src/schema.gql",
+                context: ({ req }) => ({ req }),
             }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: process.env.type,

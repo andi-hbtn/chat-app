@@ -9,24 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthService = void 0;
+exports.JwtStrategy = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_1 = require("@nestjs/jwt");
-let AuthService = class AuthService {
-    constructor(jwtService) {
-        this.jwtService = jwtService;
+const passport_1 = require("@nestjs/passport");
+const passport_jwt_1 = require("passport-jwt");
+let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy) {
+    constructor() {
+        super({
+            jwtFromRequest: passport_jwt_1.ExtractJwt.fromExtractors([
+                (request) => {
+                    return request.cookies.Authentication;
+                }
+            ]),
+            ignoreExpiration: false,
+            secretOrKey: "secret"
+        });
     }
-    async login(user, response) {
-        const expires = new Date();
-        expires.setSeconds(expires.getSeconds() + 5600);
-        const tokenPayload = { id: user.id, email: user.email };
-        const token = this.jwtService.sign(tokenPayload);
-        response.cookie('Authentication', token, { httpOnly: true, expires: expires });
+    validate(payload) {
+        console.log('Payload received in JwtStrategy:', payload);
+        return payload;
     }
 };
-exports.AuthService = AuthService;
-exports.AuthService = AuthService = __decorate([
+exports.JwtStrategy = JwtStrategy;
+exports.JwtStrategy = JwtStrategy = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [jwt_1.JwtService])
-], AuthService);
-//# sourceMappingURL=auth.service.js.map
+    __metadata("design:paramtypes", [])
+], JwtStrategy);
+//# sourceMappingURL=jwt.strategy.js.map

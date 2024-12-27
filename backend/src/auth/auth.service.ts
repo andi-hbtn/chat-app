@@ -10,7 +10,7 @@ export class AuthService {
     public async login(user:UserEntity,response:Response){
         const expires = new Date();
         expires.setSeconds(
-            expires.getSeconds() + 3600
+            expires.getSeconds() + 5600
         );
 
         const tokenPayload = {id:user.id,email:user.email}
