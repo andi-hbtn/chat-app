@@ -16,6 +16,7 @@ const passport_local_1 = require("passport-local");
 const users_service_1 = require("../../users/users.service");
 let LocalStrategy = class LocalStrategy extends (0, passport_1.PassportStrategy)(passport_local_1.Strategy) {
     constructor(userService) {
+        console.log("LocalStrategy");
         super({
             usernameField: "email"
         });

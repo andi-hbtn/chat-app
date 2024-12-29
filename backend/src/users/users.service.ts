@@ -66,7 +66,6 @@ export class UsersService {
     if(!passwordIsValid){
       throw new UnauthorizedException('Credentials are not valid');
     }
-
     return user;
   }
 

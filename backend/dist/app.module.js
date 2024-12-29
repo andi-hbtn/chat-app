@@ -8,16 +8,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const database_module_1 = require("./common/database/database.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_entity_1 = require("./users/entities/user.entity");
+const graphql_1 = require("@nestjs/graphql");
+const apollo_1 = require("@nestjs/apollo");
 const auth_module_1 = require("./auth/auth.module");
+const users_module_1 = require("./users/users.module");
+const users_resolver_1 = require("./users/users.resolver");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [database_module_1.DatabaseModule, auth_module_1.AuthModule],
+        imports: [
+            typeorm_1.TypeOrmModule.forRoot({
+                type: "mysql",
+                host: "localhost",
+                port: 3306,
+                username: "Andi",
+                password: "andi",
+                database: "chat-app",
+                entities: [user_entity_1.UserEntity],
+                synchronize: true,
+            }),
+            graphql_1.GraphQLModule.forRoot({
+                driver: apollo_1.ApolloDriver,
+                autoSchemaFile: "src/schema.gql"
+            }),
+            users_module_1.UsersModule,
+            auth_module_1.AuthModule
+        ],
         controllers: [],
-        providers: [],
+        providers: [users_resolver_1.UsersResolver],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

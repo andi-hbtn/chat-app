@@ -20,6 +20,7 @@ const create_user_input_1 = require("./dto/create-user.input");
 const update_user_input_1 = require("./dto/update-user.input");
 const common_1 = require("@nestjs/common");
 const gql_auth_guard_1 = require("../guards/gql-auth.guard");
+const current_user_decorator_1 = require("../decorator/current-user.decorator");
 let UsersResolver = class UsersResolver {
     constructor(usersService) {
         this.usersService = usersService;
@@ -33,15 +34,15 @@ let UsersResolver = class UsersResolver {
     async findOne(id) {
         return await this.usersService.findOne(id);
     }
-    updateUser(updateUserInput) {
-        return this.usersService.update(updateUserInput.id, updateUserInput);
+    updateUser(updateUserInput, user) {
+        return this.usersService.update(user.id, updateUserInput);
     }
-    async removeUser(id) {
-        const user = await this.usersService.findOne(id);
-        if (!user) {
-            throw new Error(`User with ID ${id} not found`);
+    async removeUser(user) {
+        const result = await this.usersService.findOne(user.id);
+        if (!result) {
+            throw new Error(`User with ID ${user.id} not found`);
         }
-        this.usersService.remove(id);
+        this.usersService.remove(user.id);
         return user;
     }
 };
@@ -62,6 +63,7 @@ __decorate([
 ], UsersResolver.prototype, "findAll", null);
 __decorate([
     (0, graphql_1.Query)(() => user_model_1.UserModel, { name: 'user' }),
+    (0, common_1.UseGuards)(gql_auth_guard_1.GqlAuthGuard),
     __param(0, (0, graphql_1.Args)('id', { type: () => graphql_1.Int })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -69,16 +71,19 @@ __decorate([
 ], UsersResolver.prototype, "findOne", null);
 __decorate([
     (0, graphql_1.Mutation)(() => user_model_1.UserModel),
+    (0, common_1.UseGuards)(gql_auth_guard_1.GqlAuthGuard),
     __param(0, (0, graphql_1.Args)('updateUserInput')),
+    __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [update_user_input_1.UpdateUserInput]),
+    __metadata("design:paramtypes", [update_user_input_1.UpdateUserInput, update_user_input_1.CurrentUserUpdate]),
     __metadata("design:returntype", Promise)
 ], UsersResolver.prototype, "updateUser", null);
 __decorate([
     (0, graphql_1.Mutation)(() => user_model_1.UserModel),
-    __param(0, (0, graphql_1.Args)('id', { type: () => graphql_1.Int })),
+    (0, common_1.UseGuards)(gql_auth_guard_1.GqlAuthGuard),
+    __param(0, current_user_decorator_1.CurrentUser),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [update_user_input_1.CurrentUserUpdate]),
     __metadata("design:returntype", Promise)
 ], UsersResolver.prototype, "removeUser", null);
 exports.UsersResolver = UsersResolver = __decorate([

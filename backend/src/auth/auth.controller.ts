@@ -8,13 +8,14 @@ import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly authService:AuthService){}
+    constructor(private readonly authService: AuthService) { }
 
     @Post('login')
     //@UseGuards(AuthGuard('local'))
     //rekomandohet te perdoresh klase jo te kalosh emrin e strategjise ne AuthGuard
     @UseGuards(LocalAuthGuard)
-    public async login(@CurrentUser() user:UserEntity,@Res({passthrough:true}) response:Response){
-        return this.authService.login(user,response)
+    public async login(@CurrentUser() user: UserEntity, @Res({ passthrough: true }) response: Response) {
+        //console.log("user---",user);
+        return this.authService.login(user, response)
     }
 }

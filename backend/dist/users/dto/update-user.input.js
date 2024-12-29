@@ -9,16 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateUserInput = void 0;
+exports.CurrentUserUpdate = exports.UpdateUserInput = void 0;
 const create_user_input_1 = require("./create-user.input");
 const graphql_1 = require("@nestjs/graphql");
 let UpdateUserInput = class UpdateUserInput extends (0, graphql_1.PartialType)(create_user_input_1.CreateUserInput) {
 };
 exports.UpdateUserInput = UpdateUserInput;
-__decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int),
-    __metadata("design:type", Number)
-], UpdateUserInput.prototype, "id", void 0);
 __decorate([
     (0, graphql_1.Field)(() => String, { nullable: true }),
     __metadata("design:type", String)
@@ -30,4 +26,22 @@ __decorate([
 exports.UpdateUserInput = UpdateUserInput = __decorate([
     (0, graphql_1.InputType)()
 ], UpdateUserInput);
+let CurrentUserUpdate = class CurrentUserUpdate extends (0, graphql_1.PartialType)(create_user_input_1.CreateUserInput) {
+};
+exports.CurrentUserUpdate = CurrentUserUpdate;
+__decorate([
+    (0, graphql_1.Field)(() => String, { nullable: true }),
+    __metadata("design:type", Number)
+], CurrentUserUpdate.prototype, "id", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => String, { nullable: true }),
+    __metadata("design:type", String)
+], CurrentUserUpdate.prototype, "email", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => String, { nullable: true }),
+    __metadata("design:type", String)
+], CurrentUserUpdate.prototype, "password", void 0);
+exports.CurrentUserUpdate = CurrentUserUpdate = __decorate([
+    (0, graphql_1.InputType)()
+], CurrentUserUpdate);
 //# sourceMappingURL=update-user.input.js.map

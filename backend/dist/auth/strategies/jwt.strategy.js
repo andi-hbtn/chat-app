@@ -26,7 +26,6 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
         });
     }
     validate(payload) {
-        console.log('Payload received in JwtStrategy:', payload);
         return payload;
     }
 };
